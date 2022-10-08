@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request
-import pattern
 import spacy
 
 app = Flask(__name__)
@@ -33,7 +32,7 @@ def LSP():
                     tiempo = token.text
                     hay_tiempo = True
                 elif(token.pos_ == 'VERB' and token.dep_ == 'ROOT'):
-                    verbo = token.text
+                    verbo = token.lemma_
                     # verbo = pattern.es.conjugate(str(verbo), pattern.es.INFINITIVE)
                     hay_verbo = True
                 elif(token.pos_ == 'PRON' and token.dep_ == 'nsubj'):
