@@ -1,0 +1,49 @@
+from flask import Flask, jsonify, request
+import spacy
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Home"
+
+# @app.route('/LSP', methods=['POST'])
+# def LSP():
+#     try:
+#         spacy.cli.download('es_core_news_sm')
+#         nlp = spacy.load('es_core_news_sm')
+#         doc = nlp(list(request.json.values())[0])
+#         lista = []
+#         hay_verbo = False
+#         hay_interrogativo = False
+#         hay_tiempo = False
+
+#         verbo = ""
+#         interrogativo = ""
+#         tiempo = ""
+
+#         for token in doc:
+#             if token.pos_ != "ADP" and token.pos_ != "AUX" and token.pos_ != "PUNCT":
+#                 if(token.pos_ == 'NOUN' and token.dep_ == 'obl'):
+#                     tiempo = token.text
+#                     hay_tiempo = True
+#                 elif(token.pos_ == 'VERB' and token.dep_ == 'ROOT'):
+#                     verbo = token.text
+#                     hay_verbo = True
+#                 elif(token.pos_ == 'PRON' and token.dep_ == 'nsubj'):
+#                     interrogativo = token.text
+#                     hay_interrogativo = True
+#                 else:
+#                     lista.append(token.text)
+#         if(hay_verbo):
+#             lista.append(verbo)
+#         if(hay_interrogativo):
+#             lista.append(interrogativo)
+#         if(hay_tiempo):
+#             lista.insert(0, tiempo)
+#         return jsonify({'mensaje': lista, 'exito': True})
+#     except:
+#         return jsonify({'exito': True})
+
+if __name__ == "__main__":
+    app.run()
