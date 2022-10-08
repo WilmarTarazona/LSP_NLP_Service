@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import pattern
 import spacy
 
 app = Flask(__name__)
@@ -40,6 +41,7 @@ def LSP():
                 else:
                     lista.append(token.text)
         if(hay_verbo):
+            verbo = pattern.es.conjugate(verbo, pattern.es.INFINITIVE)
             lista.append(verbo)
         if(hay_interrogativo):
             lista.append(interrogativo)
