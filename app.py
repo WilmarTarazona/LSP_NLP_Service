@@ -34,7 +34,7 @@ def LSP():
                     hay_tiempo = True
                 elif(token.pos_ == 'VERB' and token.dep_ == 'ROOT'):
                     verbo = token.text
-                    verbo = pattern.es.conjugate(str(verbo), pattern.es.INFINITIVE)
+                    # verbo = pattern.es.conjugate(str(verbo), pattern.es.INFINITIVE)
                     hay_verbo = True
                 elif(token.pos_ == 'PRON' and token.dep_ == 'nsubj'):
                     interrogativo = token.text
@@ -42,7 +42,7 @@ def LSP():
                 else:
                     lista.append(token.text)
         if(hay_verbo):
-            verbo = pattern.es.conjugate(str(verbo), pattern.es.INFINITIVE)
+            # verbo = pattern.es.conjugate(str(verbo), pattern.es.INFINITIVE)
             lista.append(verbo)
         if(hay_interrogativo):
             lista.append(interrogativo)
