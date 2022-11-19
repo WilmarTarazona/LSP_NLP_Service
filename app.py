@@ -71,43 +71,38 @@ def divide_sentence(sentence):
 def LSP():    
     try:
         sentences = divide_sentence(list(request.json.values())[0])
-
-        
         full = []
         for i in sentences:
-            doc = nlp(i)
+            doc = nlp(str(i))
             lista = []
             hay_verbo = False
             hay_interrogativo = False
             hay_tiempo = False
-
             verbo = ""
             interrogativo = ""
             tiempo = ""
             for token in doc:
                 if token.pos_ != "ADP" and token.pos_ != "AUX" and token.pos_ != "PUNCT":
-                    if(token.pos_ == 'NOUN' and token.dep_ == 'obl'):
+                    if token.pos_ == 'NOUN' and token.dep_ == 'obl':
                         tiempo = token.text
                         hay_tiempo = True
-                    elif(token.pos_ == 'VERB' and token.dep_ == 'ROOT'):
+                    elif token.pos_ == 'VERB' and token.dep_ == 'ROOT' :
                         verbo = token.lemma_
                         hay_verbo = True
-                    elif(token.pos_ == 'PRON' and token.dep_ == 'nsubj'):
+                    elif token.pos_ == 'PRON' and token.dep_ == 'nsubj':
                         interrogativo = token.text
                         hay_interrogativo = True
                     else:
                         lista.append(token.text)
-                if(hay_verbo):
+                if hay_verbo:
                     lista.append(verbo)
-                if(hay_interrogativo):
+                if hay_interrogativo:
                     lista.append(interrogativo)
-                if(hay_tiempo):
+                if hay_tiempo:
                     lista.insert(0, tiempo)
-            full += lista
-
-        return jsonify({'mensaje': full, 'exito': True})
+        return jsonify({'exito': True})
     except:
         return jsonify({'exito': False})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
